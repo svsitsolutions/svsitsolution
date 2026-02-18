@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Viswa Sakshi IT Solutions | Enterprise IT Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Colors extracted from your palette */
+            --brand-green-dark: #66b032;   /* Vibrant Green */
+            --brand-green-light: #a3d944;  /* Lime Green */
+            --brand-purple: #7030a0;       /* Deep Purple */
+            --brand-teal: #4fb0c6;         /* Soft Blue/Teal */
+            --brand-mint: #d9f2d0;         /* Very Light Green */
+            --brand-blue-muted: #38761d;   /* Note: Replaced with a deep forest from palette vibe */
+            --brand-blue-tech: #337ab7;    /* Primary Tech Blue from palette */
+            --brand-dark-purple: #3a1f5d;  /* Darkest Purple from palette */
+            
+            /* UI Mapping */
+            --tg-primary: var(--brand-blue-tech);
+            --tg-secondary: var(--brand-purple);
+            --tg-accent: var(--brand-green-dark);
+            --tg-dark: var(--brand-dark-purple);
+            --tg-slate: #64748b;
+            --tg-light: var(--brand-mint);
+            --tg-border: #e2e8f0;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--tg-dark); line-height: 1.6; overflow-x: hidden; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; background: #ffffff;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.8rem 8%; border-bottom: 2px solid var(--brand-green-light); z-index: 1000;
+        }
+        .logo { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: var(--tg-dark); 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .logo img { height: 45px; width: auto; object-fit: contain; }
+        
+        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links a { text-decoration: none; color: var(--tg-slate); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--brand-purple); }
+
+        /* --- Mobile Toggle --- */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--brand-purple);
+        }
+
+        /* --- Hero --- */
+        #home {
+            padding: 180px 8% 100px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--brand-mint) 100%);
+            display: flex; align-items: center; gap: 40px;
+        }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; color: var(--tg-dark); }
+        .hero-image img { width: 100%; max-width: 600px; }
+        .btn { padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; transition: 0.3s; display: inline-block; border: none; cursor: pointer; }
+        .btn-primary { background: var(--brand-purple); color: white; }
+        .btn-primary:hover { background: var(--brand-dark-purple); transform: translateY(-2px); }
+
+        /* --- Global Sections --- */
+        section { padding: 120px 8% 80px; }
+        .section-tag { color: var(--brand-green-dark); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; display: block; margin-bottom: 10px; text-align: center; }
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: var(--tg-dark); }
+
+        /* --- Services --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { padding: 40px; border: 1px solid var(--tg-border); border-radius: 16px; background: white; transition: 0.3s; border-bottom: 4px solid var(--brand-teal); }
+        .card:hover { border-color: var(--brand-teal); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .card i { font-size: 2rem; color: var(--brand-teal); margin-bottom: 20px; }
+
+        /* --- Plans --- */
+        #plans { background: #fdfdfd; }
+        .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .plan-card { background: white; padding: 40px; border-radius: 20px; border: 1px solid var(--tg-border); position: relative; }
+        .plan-card.popular { border: 2px solid var(--brand-purple); box-shadow: 0 10px 30px rgba(112, 48, 160, 0.1); }
+        .badge { position: absolute; top: 20px; right: 20px; background: var(--brand-green-dark); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; }
+
+        /* --- Why Us --- */
+        #why-us { background: white; }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; }
+        .why-item i { font-size: 2.5rem; color: var(--brand-green-dark); display: block; margin-bottom: 15px; }
+
+        /* --- Contact --- */
+        #contact { background: var(--brand-dark-purple); color: white; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: 0.3s;
+        }
+        .contact-card i { font-size: 2.5rem; color: var(--brand-teal); margin-bottom: 20px; }
+        .contact-card a { color: #cbd5e1; text-decoration: none; font-weight: 600; }
+
+        /* --- WhatsApp --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 100; transition: 0.3s; text-decoration: none; }
+
+        footer { padding: 40px 8%; background: #1a0b2e; color: #fff; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+
+        /* --- Responsive Design Adjustments --- */
+        @media (max-width: 1024px) {
+            #home { padding: 150px 5% 80px; gap: 20px; }
+            .hero-text h1 { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: 0.4s;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active { right: 0; }
+
+            #home { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-text h1 { font-size: 2.2rem; }
+            .hero-text div { justify-content: center; flex-wrap: wrap; }
+            .hero-image { order: -1; } /* Image on top for mobile */
+
+            section { padding: 60px 5% 40px; }
+            h2 { font-size: 1.8rem; margin-bottom: 30px; }
+            
+            .grid, .plan-grid, .why-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/917901456901" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <nav>
+        <a href="#home" class="logo">
+            <img src="111111.png" alt="Sri Viswa Sakshi Logo">
+            <div style="display: flex; flex-direction: column; align-items: center; line-height: 1.1;">
+                <span style="font-size: 1.4rem; color: var(--tg-dark); white-space: nowrap;">Sri Viswa Sakshi</span>
+                <span style="color:var(--brand-purple); font-size: 0.85rem; font-weight: 700; letter-spacing: 1.5px; margin-top: 2px;">IT SOLUTIONS</span>
+            </div>
+        </a>
+
+        <div class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+            <li><a href="#plans" onclick="toggleMenu()">Plans</a></li>
+            <li><a href="#why-us" onclick="toggleMenu()">Why Us</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <div class="hero-text">
+            <span class="section-tag" style="text-align: inherit;">Trusted IT Infrastructure Partner</span>
+            <h1>Enterprise IT <br><span style="color:var(--brand-purple)">Maintenance & Support</span></h1>
+            <p>Guaranteed 6-hour SLA response times and 24/7 support for your business-critical infrastructure.</p>
+            <div style="display: flex; gap: 30px; margin: 2rem 0;">
+                <div class="stat-item"><b style="color:var(--brand-green-dark)">99.9%</b> Uptime</div>
+                <div class="stat-item"><b style="color:var(--brand-green-dark)">6 hr</b> Response</div>
+                <div class="stat-item"><b style="color:var(--brand-green-dark)">24/7</b> Support</div>
+            </div>
+            <a href="#contact" class="btn btn-primary">Connect With Us</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=600" style="border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); border: 8px solid white;" alt="Support Team">
+        </div>
+    </header>
+
+    <section id="services">
+        <span class="section-tag">Our Expertise</span>
+        <h2>What We Offer</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-microchip"></i>
+                <h3>Preventive Maintenance</h3>
+                <p>Scheduled cleaning, health checks, and firmware updates to ensure zero hardware failure.</p>
+            </div>
+            <div class="card" style="border-bottom-color: var(--brand-purple);">
+                <i class="fas fa-tools" style="color: var(--brand-purple);"></i>
+                <h3>Breakdown Support</h3>
+                <p>On-demand troubleshooting and hardware repair with guaranteed spare parts availability.</p>
+            </div>
+            <div class="card" style="border-bottom-color: var(--brand-green-dark);">
+                <i class="fas fa-shield-virus" style="color: var(--brand-green-dark);"></i>
+                <h3>Security & Backup</h3>
+                <p>Firewall monitoring and automated data backups to protect your business assets.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans">
+        <span class="section-tag">Flexible Contracts</span>
+        <h2>MMC Plans</h2>
+	<div class="service-intro" style="margin-bottom: 40px; max-width: 900px; color: #555; line-height: 1.6;">
+       <p style="text-align: center;"> In today’s digital-first business world, dependable maintenance is critical. We provide full-spectrum IT infrastructure services to keep your systems performing at peak levels through our specialized <strong> IT AMC (Annual) </strong> and <strong> MMC (Monthly) </strong> contract models.</s></p>
+    </div>
+
+        <div class="plan-grid">
+            <div class="plan-card">
+		<div class="badge">Most Popular</div>
+                <h3 style="color: var(--tg-dark); margin-bottom: 5px;">Labour-Only</h3>
+                <p style="color: var(--brand-teal); font-weight: 700; margin-bottom: 10px;">Non-Comprehensive MMC</p>
+                <h4 style="font-size: 1.5rem; margin-bottom: 20px;">Custom Quote</h4>
+                
+                <ul style="list-style: none; padding: 0; margin-bottom: 30px; text-align: left;">
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-teal); margin-top: 4px;"></i>
+                        <span>Preventive maintenance included</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-teal); margin-top: 4px;"></i>
+                        <span>Hardware parts billed separately</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-teal); margin-top: 4px;"></i>
+                        <span>24/7 remote support</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-teal); margin-top: 4px;"></i>
+                        <span>Standard SLA: 24-hour response</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-teal); margin-top: 4px;"></i>
+                        <span>Pay-per-use spare parts</span>
+                    </li>
+                </ul>
+                
+                <a href="#contact" class="btn btn-primary" style="width:100%; text-align:center; background: var(--brand-teal);">Get Quote</a>
+            </div>
+
+            <div class="plan-card popular">
+                
+                <h3 style="color: var(--tg-dark); margin-bottom: 5px;">All-Inclusive</h3>
+                <p style="color: var(--brand-purple); font-weight: 700; margin-bottom: 10px;">Comprehensive MMC</p>
+                <h4 style="font-size: 1.5rem; margin-bottom: 20px;">Custom Quote</h4>
+                
+                <ul style="list-style: none; padding: 0; margin-bottom: 30px; text-align: left;">
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-green-dark); margin-top: 4px;"></i>
+                        <span>All hardware parts & replacements covered</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-green-dark); margin-top: 4px;"></i>
+                        <span>24/7 support with on-site visits</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-green-dark); margin-top: 4px;"></i>
+                        <span>Free standby equipment</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-green-dark); margin-top: 4px;"></i>
+                        <span>Priority SLA: 6-hour response</span>
+                    </li>
+                    <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-check-circle" style="color: var(--brand-green-dark); margin-top: 4px;"></i>
+                        <span>Annual system upgrades included</span>
+                    </li>
+                </ul>
+                
+                <a href="#contact" class="btn btn-primary" style="width:100%; text-align:center;">Get Quote</a>
+
+            </div>
+        </div>
+    </section>
+<section id="services">
+    <span class="section-tag">Hazelnut Cyborg Solutions</span>
+    <h2>Complete IT & Infrastructure Maintenance</h2>
+    
+    
+    <div class="grid">
+        <div class="card" style="border-bottom-color: #2980b9;">
+            <i class="fas fa-network-wired" style="color: #2980b9;"></i>
+            <h3>IT Infrastructure Support</h3>
+            <p>Full-spectrum maintenance for physical and virtual assets ensuring zero hardware failure.</p>
+            <ul class="card-list" style="font-size: 0.85rem; text-align: left; margin-top: 12px; list-style: none; padding: 0; color: #444;">
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Servers:</strong> Health checks & firmware updates</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Networking:</strong> Routers, Firewalls, & APs</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Workstations:</strong> Speed & security optimization</li>
+                <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Peripherals:</strong> Printers & External storage</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-bottom-color: #c0392b;">
+            <i class="fas fa-shield-alt" style="color: #c0392b;"></i>
+            <h3>Surveillance & Security</h3>
+            <p>Safeguard your assets with flawless security system maintenance and monitoring.</p>
+            <ul class="card-list" style="font-size: 0.85rem; text-align: left; margin-top: 12px; list-style: none; padding: 0; color: #444;">
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>CCTV:</strong> Lens cleaning & software updates</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Access Control:</strong> Biometrics & Smart locks</li>
+                <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Attendance:</strong> Facial recognition optimization</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-bottom-color: #f39c12;">
+            <i class="fas fa-headset" style="color: #f39c12;"></i>
+            <h3>Printers Maintenance</h3>
+            <p>regular cleaning of the exterior and internal components with a dry, lint-free cloth or compressed air to remove dust and debris, typically on a monthly basis.</p>
+            <ul class="card-list" style="font-size: 0.85rem; text-align: left; margin-top: 12px; list-style: none; padding: 0; color: #444;">
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Cleaning Routine:</strong> Clean the printer exterior with a soft cloth and use compressed air for the interior to remove debris that causes paper jams.</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Software Updates:</strong> Regularly check the manufacturer's website (e.g., HP) for firmware updates to fix bugs and improve performance.</li>
+                <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Safety Precautions:</strong>When removing jams, do not force the paper, as this can damage the internal components.</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-bottom-color: #3498db;">
+            <i class="fas fa-cloud-upload-alt" style="color: #3498db;"></i>
+            <h3>Cloud Management</h3>
+            <p>Managed cloud service maintenance to keep your platforms secure and compliant.</p>
+            <ul class="card-list" style="font-size: 0.85rem; text-align: left; margin-top: 12px; list-style: none; padding: 0; color: #444;">
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>M365 & Google Workspace:</strong> Security patches</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Compliance:</strong> License tracking & cost control</li>
+                <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Migration:</strong> Zero-data-loss transitions</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-bottom-color: #27ae60;">
+            <i class="fas fa-microchip" style="color: #27ae60;"></i>
+            <h3>Proactive Monitoring</h3>
+            <p>24/7 monitoring detects and resolves IT problems before they disrupt your business.</p>
+            <ul class="card-list" style="font-size: 0.85rem; text-align: left; margin-top: 12px; list-style: none; padding: 0; color: #444;">
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Real-Time Alerts:</strong> Instant anomaly detection</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Optimization:</strong> Ongoing system tuning</li>
+                <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Predictive:</strong> Health reports & usage analysis</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-bottom-color: #8e44ad;">
+            <i class="fas fa-tools" style="color: #8e44ad;"></i>
+            <h3>Hybrid IT Support</h3>
+            <p>Dependable tech support when and where you need it—both online and on-site.</p>
+            <ul class="card-list" style="font-size: 0.85rem; text-align: left; margin-top: 12px; list-style: none; padding: 0; color: #444;">
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>On-Site:</strong> Critical hardware & cabling</li>
+                <li style="margin-bottom: 5px;"><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Remote:</strong> Secure virtual instant resolution</li>
+                <li><i class="fas fa-check-circle" style="color: #2ecc71; margin-right: 8px;"></i><strong>Rapid Response:</strong> Urgency-based diagnosis</li>
+            </ul>
+        </div>
+    </div>
+</section>
+    <section id="why-us">
+        <span class="section-tag">Sri Viswa Sakshi IT Solutions</span>
+        <h2>Why Choose Us</h2>
+        <div class="why-grid">
+            <div class="why-item">
+                <i class="fas fa-bolt"></i>
+                <h4>6 hr Response</h4>
+                <p>Fastest SLA in the industry</p>
+            </div>
+            <div class="why-item">
+                <i class="fas fa-user-gear" style="color: var(--brand-purple);"></i>
+                <h4>30+ Engineers</h4>
+                <p>Expert Technical Team</p>
+            </div>
+            <div class="why-item">
+                <i class="fas fa-map-location-dot" style="color: var(--brand-teal);"></i>
+                <h4> Pan-India </h4>
+                <p> 25+ Service Partners </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <span class="section-tag">Get In Touch</span>
+        <h2 style="color: white;">Contact Us</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h4>Phone</h4>
+                <p><a href="tel:+917901456901">+91 7901456901</a></p>
+		           <a href="tel:+919515222350">+91 9515222350</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Email</h4>
+                <a href="mailto:svsit@gmail.com">Svsit@gmail.com</a>
+            </div>
+            <div class="contact-card">
+                <i class="fas fa-clock"></i>
+                <h4>Support</h4>
+                <p> 24/7  Emergency Assistance </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sri Viswa Sakshi IT Solutions.        All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+            
+            // Toggle Icon
+            const icon = document.querySelector('.mobile-menu-btn i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    </script>
+
+</body>
+</html>
